@@ -1,181 +1,154 @@
-# Challenge-java-conversor
+# Challenge Java Conversor
+
+![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)
+![Console](https://img.shields.io/badge/interface-console-0a7ea4)
+![API](https://img.shields.io/badge/API-ExchangeRate-f97316)
+![Status](https://img.shields.io/badge/status-MVP%20funcional-2e8b57)
 
 # Conversor de Moedas
 
-Aplicação Java para conversão de moedas em tempo real utilizando a ExchangeRate-API.
+Aplicação Java de linha de comando para conversão de moedas em tempo real usando a ExchangeRate API, com menu interativo, validação de entrada, histórico de conversões na sessão e suporte a conversões rápidas e personalizadas.
 
-## 📋 Sobre o Projeto
+O repositório agora inclui uma implementação funcional do projeto, e não apenas a descrição do challenge.
 
-Conversor de moedas desenvolvido em Java que permite realizar conversões entre diferentes moedas utilizando taxas de câmbio atualizadas em tempo real através da ExchangeRate-API.
+## Visão Geral
 
-### Funcionalidades
+O objetivo do projeto é permitir que o usuário consulte taxas de câmbio atualizadas e converta valores entre moedas de forma simples pelo terminal.
 
-- ✅ Conversão entre múltiplas moedas
-- ✅ Taxas de câmbio em tempo real
-- ✅ Interface de linha de comando intuitiva
-- ✅ Histórico de conversões na sessão
-- ✅ Tratamento de erros e validações
-- ✅ Suporte para as principais moedas mundiais
+Nesta versão, a aplicação oferece:
 
-### Moedas Suportadas
+- menu de conversões rápidas;
+- conversão personalizada entre moedas;
+- consulta de taxa em tempo real;
+- histórico local durante a execução;
+- tratamento de erros de entrada e falhas de integração.
 
-- **USD** - Dólar Americano
-- **BRL** - Real Brasileiro
-- **EUR** - Euro
-- **GBP** - Libra Esterlina
-- **JPY** - Iene Japonês
-- **ARS** - Peso Argentino
-- **COP** - Peso Colombiano
+## Funcionalidades
 
-## 🚀 Começando
+- Conversão entre moedas em tempo real
+- Menu com pares de moedas mais comuns
+- Conversão personalizada entre moedas suportadas
+- Histórico de conversões na sessão
+- Validação de valor monetário e códigos de moeda
+- Configuração por variável de ambiente
+- Mensagens de erro mais amigáveis no console
 
-### Pré-requisitos
+## Moedas Suportadas no Menu Rápido
 
-- Java JDK 17 ou superior
-- Conexão com a internet
-- Chave de API da ExchangeRate-API
+- `USD` - Dólar Americano
+- `BRL` - Real Brasileiro
+- `EUR` - Euro
+- `GBP` - Libra Esterlina
+- `JPY` - Iene Japonês
+- `ARS` - Peso Argentino
+- `COP` - Peso Colombiano
 
-### Obtendo a Chave da API
+Na conversão personalizada, qualquer moeda suportada pela API pode ser consultada.
 
-1. Acesse [ExchangeRate-API](https://www.exchangerate-api.com/)
-2. Insira seu e-mail para registro
-3. Você receberá a chave de API no e-mail cadastrado
-4. A chave gratuita permite até 1.500 requisições por mês
+## Estrutura do Projeto
 
-### Instalação
+```text
+.
+├── pom.xml
+├── README.md
+└── src
+    └── main
+        └── java
+            └── br/com/vicfmartins/conversor
+                ├── config
+                ├── model
+                ├── service
+                ├── ui
+                ├── util
+                └── Main.java
+```
 
-1. Clone o repositório
+## Stack Utilizada
+
+- Java 17
+- Java HttpClient
+- Gson
+- Maven
+- ExchangeRate API
+
+## Configuração
+
+Antes de executar, defina a variável de ambiente `EXCHANGE_RATE_API_KEY`.
+
+### PowerShell
+
+```powershell
+$env:EXCHANGE_RATE_API_KEY="sua_chave_aqui"
+```
+
+### CMD
+
+```cmd
+set EXCHANGE_RATE_API_KEY=sua_chave_aqui
+```
+
+## Como Executar
+
+### 1. Clonar o repositório
+
 ```bash
-git clone https://github.com/seu-usuario/conversor-moedas.git
-cd conversor-moedas
+git clone https://github.com/VicFmartins/Challenge-java-conversor.git
+cd Challenge-java-conversor
 ```
 
-2. Configure sua chave da API
+### 2. Compilar o projeto
 
-Edite o arquivo `src/config/ApiConfig.java` e insira sua chave:
-```java
-private static final String API_KEY = "sua_chave_aqui";
-```
-
-3. Compile o projeto
 ```bash
-javac -d bin src/**/*.java
+mvn clean package
 ```
 
-4. Execute a aplicação
+### 3. Executar
+
 ```bash
-java -cp bin Main
+java -jar target/conversor-moedas-1.0.0-jar-with-dependencies.jar
 ```
 
-## 💻 Como Usar
+## Menu Disponível
 
-Ao executar a aplicação, você verá um menu interativo:
-
-```
-========================================
-      CONVERSOR DE MOEDAS
-========================================
-1. Dólar (USD) → Real Brasileiro (BRL)
-2. Real Brasileiro (BRL) → Dólar (USD)
-3. Dólar (USD) → Euro (EUR)
-4. Euro (EUR) → Dólar (USD)
-5. Dólar (USD) → Peso Argentino (ARS)
-6. Peso Argentino (ARS) → Dólar (USD)
-7. Conversão personalizada
-8. Ver histórico de conversões
-9. Sair
-========================================
-Escolha uma opção:
+```text
+1. USD -> BRL
+2. BRL -> USD
+3. USD -> EUR
+4. EUR -> USD
+5. USD -> ARS
+6. ARS -> USD
+7. Conversao personalizada
+8. Ver historico
+9. Ver moedas do menu rapido
+0. Sair
 ```
 
-Selecione a opção desejada e insira o valor a ser convertido.
+## Exemplo de Uso
 
-### Exemplo de Uso
-
-```
-Escolha uma opção: 1
+```text
+Escolha uma opcao: 1
 Digite o valor a converter: 100
 
-Resultado da Conversão:
-----------------------------------------
+Resultado da conversao
 100.00 USD = 495.50 BRL
-Taxa de câmbio: 1 USD = 4.955 BRL
-Data: 15/12/2025 14:30:45
-----------------------------------------
+Taxa utilizada: 1 USD = 4.9550 BRL
 ```
 
-## 📁 Estrutura do Projeto
+## Regras Atuais do MVP
 
-```
-conversor-moedas/
-│
-├── src/
-│   ├── Main.java
-│   ├── config/
-│   │   └── ApiConfig.java
-│   ├── model/
-│   │   ├── Currency.java
-│   │   └── ConversionResult.java
-│   ├── service/
-│   │   ├── ExchangeRateService.java
-│   │   └── ConversionService.java
-│   └── util/
-│       ├── InputValidator.java
-│       └── ConsoleHelper.java
-│
-├── README.md
-└── .gitignore
-```
+- a chave da API não fica hardcoded no código;
+- o histórico existe durante a sessão atual da aplicação;
+- a conversão personalizada aceita códigos informados pelo usuário;
+- respostas inválidas da API são tratadas com erro explícito.
 
-## 🛠️ Tecnologias Utilizadas
+## Próximos Passos
 
-- **Java 17+** - Linguagem de programação
-- **ExchangeRate-API** - API de taxas de câmbio
-- **Gson** - Processamento de JSON
-- **HttpClient** - Requisições HTTP
+- persistir histórico em arquivo;
+- adicionar cache de cotações;
+- incluir testes unitários;
+- exportar histórico para CSV;
+- adicionar interface gráfica.
 
-## 🔧 Configurações Avançadas
+## Observação
 
-### Adicionar Novas Moedas
-
-Para adicionar suporte a novas moedas, edite o enum `Currency` em `src/model/Currency.java`:
-
-```java
-public enum Currency {
-    USD("Dólar Americano"),
-    BRL("Real Brasileiro"),
-    // Adicione aqui...
-}
-```
-
-## 📝 Tratamento de Erros
-
-A aplicação possui tratamento para:
-
-- Falhas na conexão com a API
-- Valores inválidos de entrada
-- Moedas não suportadas
-- Limites de requisição excedidos
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Para contribuir:
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/NovaFuncionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
-5. Abra um Pull Request
-
-
-## ✨ Agradecimentos
-
-- [Alura](https://www.alura.com.br/) - Plataforma de ensino
-- [Oracle Next Education](https://www.oracle.com/br/education/oracle-next-education/) - Programa ONE
-- [ExchangeRate-API](https://www.exchangerate-api.com/) - API de taxas de câmbio
-
-
-
----
-
-Desenvolvido como parte do Challenge ONE - Oracle Next Education 🚀
+As taxas retornadas dependem da ExchangeRate API e podem variar conforme o momento da consulta e o plano da chave utilizada.
