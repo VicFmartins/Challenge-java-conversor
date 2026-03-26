@@ -92,7 +92,7 @@ set EXCHANGE_RATE_API_KEY=sua_chave_aqui
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/VicFmartins/Challenge-java-conversor.git
+git clone <url-do-repositorio>
 cd Challenge-java-conversor
 ```
 
